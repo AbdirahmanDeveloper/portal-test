@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ===== META & STYLES ===== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="index.css">
+    <title>GTU Student Portal</title>
+
+    <!-- ===== AUTH CHECK ===== -->
+
+</head>
+<body>
+    <!-- ================= TOP BAR ================= -->
+    <div class="top-bar">
+        <div class="top-bar-content">
+
+            <!-- Left side -->
+            <div class="top-left">
+                © <span id="topYear"></span> Global Tech University
+            </div>
+
+            <!-- Right side -->
+            <div class="top-right">
+                <span>Working Hours: Mon–Fri 8:00 AM – 5:00 PM</span>
+                <span class="divider">|</span>
+                <span>Email: info@gtu.ac.ke</span>
+                <button id="themeToggle" class="theme-btn">🌓</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+    // Auto update year
+    document.getElementById("topYear").textContent = new Date().getFullYear();
+    </script>
+
+
+    <!-- ================= HEADER / NAVIGATION ================= -->
+    <header>
+        <div class="navigation-btn">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <nav>
+            <div class="logo">
+                <img src="/frontend/images/logo.png" alt="">
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#" class="active" onclick="showPage('home', event)">HOME</a></li>
+                <li><a href="#" onclick="showPage('information', event)">INFORMATION UPDATE</a></li>
+                <li><a href="#" onclick="showPage('fees', event)">FEES</a></li>
+                <li><a href="#" onclick="showPage('timetables', event)">TIMETABLES</a></li>
+                <li><a href="#" onclick="showPage('results', event)">RESULTS</a></li>
+                <li><a href="#" onclick="showPage('course', event)">COURSE REGISTRATION</a></li>
+                <li><a href="#" onclick="showPage('requests', event)">REQUESTS</a></li>
+                <li><a id="signout" href="#">SIGN OUT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ================= CHATBOT ================= -->
+    <button class="open-btn" id="open-btn">
+        <span class="material-symbols-outlined">robot_2</span>
+    </button>
+
+    <div class="chatbot-section" id="chatbot-section">
+        <div class="close-btn" id="close-btn">
+            <button><span class="material-symbols-outlined">close_small</span></button>
+        </div>
+
+        <div class="chat-box" id="chat-box"></div>
+
+        <div class="input-area">
+            <input id="user-input" type="text" placeholder="Ask anything...">
+            <button id="send-btn"><span class="material-symbols-outlined">send</span></button>
+        </div>
+    </div>
+
+    <!-- ================= MAIN CONTENT SECTIONS ================= -->
+    <div class="sections">
+
+        <!-- ===== HOME / DASHBOARD ===== -->
+        <section class="content-section active" id="home">
+            <div class="student-details">
+                <p id="studentName"></p>
+                <p id="regNumber"></p>
+                <p id="studentCourse"></p>
+            </div>
+
+            <div class="dashboard">
+                <div class="dashboard-card" id="gpa">
+                    <div class="card-title">
+                        <span class="material-symbols-outlined card-icon">trending_up</span>
+                        <h4>GPA Progress</h4>
+                    </div>
+
+                    <div class="card-progress">
+                        <div class="progress-desc">
+                            <p>Current GPA</p>
+                            <p id="gpa"><strong></strong></p>
+                        </div>
+                        <div class="progress-bar" id="gpaBar"><span id="gpaFill"></span></div>
+                        <div class="progress-desc">
+                            <p>Target GPA</p>
+                            <p id="target-gpa"></p>
+                        </div>
+                        <div class="mini-card">
+                            <p id="gpa-percentage">No GPA records yet</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card" id="fees-dashboard-card">
+                    <div class="card-title">
+                        <span class="material-symbols-outlined card-icon">attach_money</span>
+                        <h4>Fee Progress</h4>
+                    </div>
+
+                    <div class="card-progress">
+                        <div class="progress-desc">
+                            <p>Paid</p>
+                            <p><strong id="paid"></strong></p>
+                        </div>
+                        <div class="progress-bar" id="feesBar"><span id="feesFill"></span></div>
+                        <div class="progress-desc">
+                            <p id="fees-percentage"></p>
+                        </div>
+                        <hr>
+                        <div class="progress-desc">
+                            <p>Balance</p>
+                            <p id="balance"></p>
+                        </div>
+                        <div class="mini-card" id="fees-minicard">
+                            <p id="fees-minicard-desc">No fees balance found</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== INFORMATION UPDATE ===== -->
+        <section class="content-section" id="information">
+            <div class="student-details">
+                <p id="studentName"></p>
+                <p id="regNumber"></p>
+                <p id="studentCourse"></p>
+            </div>
+
+            <div class="personal-details">
+                <div class="personal">
+                    <table>
+                        <h2>Personal Information Update</h2>
+                        <tr>
+                            <th>Name:</th>
+                            <td id="first-name"></td>
+                            <td id="second-name"></td>
+                            <td id="last-name"></td>
+                        </tr>
+                        <tr>
+                            <th>Main Mobile</th>
+                            <td id="main-mobile"></td>
+                            <th>Alt. Mobile</th>
+                            <td id="alt-mobile"></td>
+                        </tr>
+                        <tr>
+                            <th>Online Mobile</th>
+                            <td id="online-mobile" style="border:none;"></td>
+                        </tr>
+                        <tr>
+                            <th>Main Email:</th>
+                            <td id="main-email"></td>
+                            <th>Alt. Email:</th>
+                            <td id="alt-email"></td>
+                        </tr>
+                        <tr>
+                            <th>Online Email:</th>
+                            <td id="online-email" style="border:none;"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FEES ===== -->
+        <section class="content-section" id="fees">
+            <div class="student-details">
+                <p id="studentName"></p>
+                <p id="regNumber"></p>
+                <p id="studentCourse"></p>
+            </div>
+
+            <div class="fees-statement">
+                <table id="feesTable">
+                    <h2>Online Fees Statement</h2>
+                    <thead>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Debits</th>
+                        <th>Credits</th>
+                        <th>Balance</th>
+                    </thead>
+                    <tbody id="feesTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ===== TIMETABLES ===== -->
+        <section class="content-section" id="timetables">
+            <div class="student-details">
+                <p id="studentName"></p>
+                <p id="regNumber"></p>
+                <p id="studentCourse"></p>
+            </div>
+
+            <div class="timetable">
+                <h2>Teaching timetable</h2>
+                <table id="timetable">
+                    <thead>
+                        <th>Unit Code</th>
+                        <th>Unit Name</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Venue</th>
+                        <th>Lecturer</th>
+                        <th>Exam Date</th>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ===== RESULTS ===== -->
+        <section class="content-section" id="results">
+            <div class="student-details">
+                <p id="studentName"></p>
+                <p id="regNumber"></p>
+                <p id="studentCourse"></p>
+            </div>
+
+            <div class="results">
+                <h2>Results</h2>
+                <table>
+                    <thead>
+                        <th>Unit Code</th>
+                        <th>Unit Name</th>
+                        <th>Academic Hours</th>
+                        <th>Marks</th>
+                        <th>Mean Grade %</th>
+                    </thead>
+                    <tbody id="resultsTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+       <!-- ===== COURSE REGISTRATION ===== -->
+        <section class="content-section" id="course">
+            <div class="student-details">
+                <p id="studentName"></p>
+                <p id="regNumber"></p>
+                <p id="studentCourse"></p>
+            </div>
+
+            <div class="registered-courses">
+                <h2>Registred Courses</h2>
+                <table id="registredCourses">
+                    <thead>
+                        <th>Unit Code</th>
+                        <th>Unit Name</th>
+                        <th>Exam Type</th>
+                        <th>Group</th>
+                        <th>Lecturer Name</th>
+                    </thead>
+                    <tbody id="courseTableBody">
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="register-course">
+                <h2>Register Courses</h2>
+                <form id="courseForm">
+                    <table style="width: 300px;">
+                        <thead>
+                            <th>Unit Code</th>
+                            <th>Group</th>
+                            <th>Exam type</th>
+                        </thead>
+
+                        <tr>
+                            <td><input class="unit-code" type="text"></td>
+                            <td>
+                                <select class="group">
+                                    <option value="Class 1">Class 1</option>
+                                    <option value="Class 2">Class 2</option>
+                                    <option value="Class 3">Class 3</option>
+                                    <option value="Class 4">Class 4</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select class="examType">
+                                    <option value="First Attempt">First Attempt</option>
+                                    <option value="Second Attempt">Second Attempt</option>
+                                    <option value="Retake">Retake</option>
+                                    <option value="Project">Project</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><input class="unit-code" type="text"></td>
+                            <td>
+                                <select class="group">
+                                    <option value="Class 1">Class 1</option>
+                                    <option value="Class 2">Class 2</option>
+                                    <option value="Class 3">Class 3</option>
+                                    <option value="Class 4">Class 4</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select class="examType">
+                                    <option value="First Attempt">First Attempt</option>
+                                    <option value="Second Attempt">Second Attempt</option>
+                                    <option value="Retake">Retake</option>
+                                    <option value="Project">Project</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <button id="registerBtn">Register</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ===== REQUESTS ===== -->
+        <section class="content-section" id="requests">
+            <div class="student-details">
+                <p id="studentName"></p>
+                <p id="regNumber"></p>
+                <p id="studentCourse"></p>
+            </div>
+        
+            <div class="request-form">
+                <h2>Student Request Form</h2>
+                <form id="requestForm">
+                    <table>
+                        <tr>
+                            <th>Request Type:</th>
+                            <td>
+                                <select name="request" id="request-type" style="width: 200px; height: 100%">
+                                    <option value="Academic leave">Academic leave</option>
+                                    <option value="Unit Addition">Unit Addition</option>
+                                    <option value="Unit Withdrawal">Unit Withdrawal</option>
+                                    <option value="Campus Transfer">Campus Transfer</option>
+                                    <option value="Missing Marks">Missing Marks</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+        
+                    <textarea name="text-area" id="text-area"></textarea>
+                    <button id="request-btn" type="submit">Send Request</button>
+                </form>
+            </div>
+        
+            <div class="approval-form">
+                <h2>Approved Requests</h2>
+                <form id="approvalForm">
+                    <table>
+                        <thead>
+                            <th>Request Type</th>
+                            <th>Request Date</th>
+                            <th>Remarks</th>
+                        </thead>
+                        <tbody id="approvalTBody"></tbody>
+                    </table>
+                </form>
+            </div>
+        </section>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
